@@ -1,19 +1,92 @@
 <!doctype html>
 <html lang="en">
 <head>
-    <title>CS4241 Assignment 2</title>
     <meta charset="utf-8">
+    <title>To Do List</title>
     <script src="js/main.js"></script>
     <link rel="stylesheet" href="css/main.css">
 
-    <!-- get rid of favicon error -->
+    <!-- Get rid of favicon error -->
     <link rel="icon" href="data:;base64,iVBORw0KGgo=">
 </head>
 <body>
-<form>
-    <label for="yourname">Your Name: </label><input type="text" id="yourname" value="your name here">
-    <button>submit</button>
-</form>
+<header>
+    <h1>To Do List</h1>
+</header>
+
+<section id="taskSection">
+    <!-- Create Task Section -->
+    <div id="createTask" class="task-form">
+        <h2>Create Task</h2>
+        <form id="listForm">
+            <label for="task">Task:</label>
+            <input type="text" id="task" name="task" required>
+
+            <label for="priority">Priority:</label>
+            <select id="priority" name="priority" required>
+                <option value="low">Low</option>
+                <option value="medium">Medium</option>
+                <option value="high">High</option>
+            </select>
+
+            <label for="info">Additional Information:</label>
+            <input type="text" id="info" name="info">
+
+            <label for="date">Date:</label>
+            <input type="date" id="date" name="date" required>
+
+            <button type="submit">Add Task</button>
+        </form>
+    </div>
+
+    <!-- Edit Task Section -->
+    <div id="editTask" class="task-form" style="display: none;">
+        <h2>Edit Task</h2>
+        <form id="editForm">
+            <input type="hidden" id="editIndex">
+            <label for="editTaskName">Task:</label>
+            <input type="text" id="editTaskName" name="task" required>
+
+            <label for="editPriority">Priority:</label>
+            <select id="editPriority" name="priority" required>
+                <option value="low">Low</option>
+                <option value="medium">Medium</option>
+                <option value="high">High</option>
+            </select>
+
+            <label for="editInfo">Additional Information:</label>
+            <input type="text" id="editInfo" name="info">
+
+            <label for="editDate">Date:</label>
+            <input type="date" id="editDate" name="date" required>
+
+            <button type="submit">Save Changes</button>
+            <button type="button" onclick="cancelEdit()">Cancel</button>
+        </form>
+    </div>
+</section>
+
+<section id="taskList">
+    <h2>Tasks:</h2>
+    <ul id="tasks"></ul>
+
+    <section id="tableList">
+        <h2>To Do List Table</h2>
+        <table id="taskTable">
+            <thead>
+            <tr>
+                <th>Task</th>
+                <th>Info</th>
+                <th>Priority</th>
+                <th>Date</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody id="taskTableBody">
+            </tbody>
+        </table>
+    </section>
+</section>
 
 </body>
 </html>
