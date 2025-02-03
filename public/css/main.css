@@ -8,13 +8,18 @@
 .task-form {
     width: 45%;  /* Adjust the width for both forms */
     padding: 20px;
-    background-color: #f4f4f4;
+    background-color: #cfb0b0;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
+h1{
+    font-family: Poppins, serif;
+}
+
 h2 {
     margin-bottom: 10px;
+    font-family: Poppins, serif;
 }
 
 label {
@@ -34,7 +39,7 @@ select {
 
 button {
     padding: 10px 15px;
-    background-color: #007bff;
+    background-color: #506175;
     color: white;
     border: none;
     border-radius: 4px;
@@ -42,7 +47,7 @@ button {
 }
 
 button:hover {
-    background-color: #0056b3;
+    background-color: #3c5877;
 }
 
 #editTask {
@@ -53,7 +58,7 @@ button:hover {
     z-index: 10;
     background-color: #fff;
     width: 45%;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 8px rgba(101, 91, 91, 0.2);
     border-radius: 8px;
     padding: 20px;
 }
@@ -70,13 +75,13 @@ button:hover {
 }
 
 #taskTable th {
-    background-color: #f4f4f4;
+    background-color: #615b75;
 }
 
 #taskTable button {
-    background-color: #28a745;
+    background-color: #cfb0b0;
 }
 
 #taskTable button:hover {
-    background-color: #218838;
+    background-color: #807171;
 }
