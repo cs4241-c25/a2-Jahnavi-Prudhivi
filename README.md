@@ -2,9 +2,7 @@
 Assignment 2 - Short Stack: Basic Two-tier Web Application using HTML/CSS/JS and Node.js
 ===
 Name: Jahnavi Prudhivi
- HTML, CSS, JavaScript, Node.js, and communication between the client and the server.
-
-Sample Readme (delete the above when you're ready to submit, and modify the below so with your links and descriptions)
+HTML, CSS, JavaScript, Node.js, and communication between the client and the server.
 ---
 ## Task Management
 This project is a task management web application that allows users to create, edit and delete tasks. The tasks are stored in a table and the user can interact with the table to perform these actions.
