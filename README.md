@@ -7,6 +7,9 @@ Assignment 2 - Short Stack: Basic Two-tier Web Application using HTML/CSS/JS and
 ## Task Management
 Name: Jahnavi Prudhivi
 
+LINK: https://a2-jahnavi-prudhivi.glitch.me/
+
+
 
 HTML, CSS, JavaScript, Node.js, and communication between the client and the server.
 
