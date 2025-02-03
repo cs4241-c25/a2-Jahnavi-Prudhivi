@@ -15,15 +15,20 @@ const server = http.createServer(function(request, response) {
         handlePut(request, response);
     } else if (request.method === "DELETE") {
         handleDelete(request, response);
+    } else {
+        response.writeHead(405, { "Content-Type": "application/json" });
+        response.end(JSON.stringify({ error: "Method Not Allowed" }));
     }
 });
 
 const handleGet = function(request, response) {
-    if (request.url === "/tasks") {
+    const filename = dir + request.url.slice(1);
+    if (request.url === "/") {
+        sendFile(response, "public/index.html");
+    } else if (request.url === "/tasks") {
         response.writeHead(200, { "Content-Type": "application/json" });
         response.end(JSON.stringify(tasks));
     } else {
-        const filename = dir + (request.url === "/" ? "index.html" : request.url.slice(1));
         sendFile(response, filename);
     }
 };
@@ -44,38 +49,41 @@ const handlePost = function(request, response) {
 };
 
 const handlePut = function(request, response) {
-    const taskId = parseInt(request.url.split('/')[2]); // Get task ID from URL
-    let dataString = "";
+    const taskId = parseInt(request.url.split('/')[2]); // Extract task ID from URL
 
+    if (isNaN(taskId) || taskId < 0 || taskId >= tasks.length) {
+        response.writeHead(400, { "Content-Type": "application/json" });
+        response.end(JSON.stringify({ error: "Invalid task ID" }));
+        return;
+    }
+
+    let dataString = "";
     request.on("data", function(data) {
         dataString += data;
     });
 
     request.on("end", function() {
         const updatedTask = JSON.parse(dataString);
+        tasks[taskId] = updatedTask; // Update task
 
-        if (tasks[taskId]) {
-            tasks[taskId] = updatedTask; // Update the task with new data
-            response.writeHead(200, { "Content-Type": "application/json" });
-            response.end(JSON.stringify(tasks));
-        } else {
-            response.writeHead(404, { "Content-Type": "application/json" });
-            response.end(JSON.stringify({ error: "Task not found" }));
-        }
+        response.writeHead(200, { "Content-Type": "application/json" });
+        response.end(JSON.stringify(tasks));
     });
 };
 
 const handleDelete = function(request, response) {
-    const taskId = parseInt(request.url.split('/')[2]); // Get task ID from URL
+    const taskId = parseInt(request.url.split('/')[2]); // Extract task ID from URL
 
-    if (tasks[taskId]) {
-        tasks.splice(taskId, 1); // Remove the task from the array
-        response.writeHead(200, { "Content-Type": "application/json" });
-        response.end(JSON.stringify(tasks));
-    } else {
-        response.writeHead(404, { "Content-Type": "application/json" });
-        response.end(JSON.stringify({ error: "Task not found" }));
+    if (isNaN(taskId) || taskId < 0 || taskId >= tasks.length) {
+        response.writeHead(400, { "Content-Type": "application/json" });
+        response.end(JSON.stringify({ error: "Invalid task ID" }));
+        return;
     }
+
+    tasks.splice(taskId, 1); // Remove task
+
+    response.writeHead(200, { "Content-Type": "application/json" });
+    response.end(JSON.stringify(tasks));
 };
 
 const sendFile = function(response, filename) {
@@ -91,4 +99,6 @@ const sendFile = function(response, filename) {
     });
 };
 
-server.listen(process.env.PORT || port);
+server.listen(process.env.PORT || port, () => {
+    console.log(`Server running on port ${process.env.PORT || port}`);
+});
